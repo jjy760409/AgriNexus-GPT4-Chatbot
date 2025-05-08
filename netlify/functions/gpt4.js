@@ -1,37 +1,25 @@
-const openaiModule = require("openai");
-const Configuration = openaiModule.default.Configuration;
-const OpenAIApi = openaiModule.default.OpenAIApi;
-
-exports.handler = async function (event, context) {
+export default async (request, context) => {
   try {
-    const { message } = JSON.parse(event.body || "{}");
+    const { default: OpenAI } = await import("openai");
 
-    if (!process.env.OPENAI_API_KEY) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "OPENAI_API_KEY가 설정되지 않았습니다." })
-      };
-    }
-
-    const configuration = new Configuration({
+    const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY
     });
 
-    const openai = new OpenAIApi(configuration);
+    const { message } = await request.json();
 
-    const response = await openai.createChatCompletion({
+    const chat = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [{ role: "user", content: message }]
     });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ reply: response.data.choices[0].message.content })
-    };
+    return new Response(JSON.stringify({ reply: chat.choices[0].message.content }), {
+      headers: { "Content-Type": "application/json" }
+    });
   } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message || "오류 발생" })
-    };
+    return new Response(JSON.stringify({ error: err.message || "에러 발생" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 };
