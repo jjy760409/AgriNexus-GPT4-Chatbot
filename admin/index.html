@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 AgriNexus 관리자 대시보드</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 2rem; }
+    h1 { font-size: 24px; }
+    .log-container { background: #fff; padding: 1rem; border: 1px solid #ccc; height: 400px; overflow-y: scroll; }
+    .log-entry { margin-bottom: 1rem; border-bottom: 1px dashed #ddd; padding-bottom: 0.5rem; }
+    .log-entry pre { white-space: pre-wrap; word-wrap: break-word; }
+  </style>
+</head>
+<body>
+  <h1>📊 AgriNexus 관리자 대시보드</h1>
+  <div class="log-container" id="logContainer">
+    <div class="log-entry"><strong>📌 시스템 로그:</strong><pre>불러오는 중...</pre></div>
+  </div>
+  <script>
+    // 예시 로그
+    const logs = [
+      { input: "스마트팜", output: "스마트팜은 첨단 기술을 활용한 농업 시스템입니다." },
+      { input: "기후 변화", output: "기후 변화는 농업 생산성에 영향을 줄 수 있습니다." }
+    ];
+    const container = document.getElementById("logContainer");
+    container.innerHTML = logs.map(log => `
+      <div class="log-entry">
+        <strong>사용자 질문:</strong> ${log.input}<br/>
+        <strong>GPT 응답:</strong> <pre>${log.output}</pre>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
