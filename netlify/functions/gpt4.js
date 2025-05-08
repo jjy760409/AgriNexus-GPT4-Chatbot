@@ -1,4 +1,6 @@
-const { Configuration, OpenAIApi } = require("openai");
+const openaiModule = require("openai");
+const Configuration = openaiModule.Configuration;
+const OpenAIApi = openaiModule.OpenAIApi;
 
 exports.handler = async function (event, context) {
   try {
