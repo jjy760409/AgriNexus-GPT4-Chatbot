@@ -1,8 +1,14 @@
-# AgriNexus GPT-4 Chatbot
+# AgriNexus GPT-4 Chatbot (Netlify Functions 연동)
 
-이 프로젝트는 OpenAI GPT-4와 연동되는 간단한 웹 챗봇입니다.
+## 📦 파일 구성
 
-## 사용법
-1. `.env` 파일에 OpenAI API 키를 입력하세요.
-2. Netlify Functions 또는 백엔드 서버에서 `/gpt4` 엔드포인트를 구성하세요.
-3. `index.html`을 브라우저에서 열면 챗봇을 사용할 수 있습니다.
+- index.html / style.css / script.js → 사용자 인터페이스
+- netlify/functions/gpt4.js → OpenAI API 호출 서버리스 함수
+
+## 🚀 배포 방법
+
+1. GitHub에 업로드
+2. Netlify에서 "New Site from Git"
+3. Publish directory: `./`
+4. Functions directory: `netlify/functions`
+5. 환경변수 등록: `OPENAI_API_KEY`

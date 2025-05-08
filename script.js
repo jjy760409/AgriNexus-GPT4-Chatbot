@@ -4,7 +4,7 @@ async function sendMessage() {
   chatOutput.textContent = "응답 중...";
 
   try {
-    const response = await fetch("https://your-netlify-function-url/.netlify/functions/gpt4", {
+    const response = await fetch("/.netlify/functions/gpt4", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
